@@ -1,4 +1,5 @@
 ﻿using Application.Abstractions;
+using Application.Features.Users.DTOs;
 using AutoMapper;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -20,7 +21,7 @@ public static class DependencyInjection
 
         services.AddSingleton(provider => new MapperConfiguration(mapper =>
         {
-            //mapper.AddProfile(new CommonProfile());
+            mapper.AddProfile(new UserProfile());
 
         }).CreateMapper());
 

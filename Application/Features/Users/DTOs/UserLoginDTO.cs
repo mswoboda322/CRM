@@ -1,5 +1,5 @@
 ﻿namespace Application.Features.Users.DTOs;
-public class UserLoginDTO
+public sealed class UserLoginDTO
 {
     public string Email { get; set; }
     public string Password { get; set; }
