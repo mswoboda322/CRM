@@ -1,12 +1,6 @@
 using API.Configuration;
-using Infrastructure;
 using Application;
-using Domain.Entities;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using Infrastructure.Settings;
-using Microsoft.Extensions.Configuration;
-
+using Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,8 +10,11 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddCustomCors(builder.Configuration);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddCustomSwagger();
+
+builder.Services.AddCustomControllers();
+
+builder.Services.AddCustomAuthentication(builder.Configuration);
 
 builder.Services.AddApplicationLayer();
 
@@ -25,14 +22,9 @@ builder.Services.AddInfrastructureLayer(builder.Configuration);
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
-
 app.UseInfrastructureLayer(app.Services);
+
+app.UseCustomSwagger(app.Environment);
 
 app.UseHttpsRedirection();
 
@@ -40,6 +32,6 @@ app.UseCustomCors();
 
 app.UseAuthorization();
 
-app.MapControllers();
+app.UseCustomControllers();
 
 app.Run();
