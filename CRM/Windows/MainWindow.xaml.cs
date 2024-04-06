@@ -1,5 +1,5 @@
-﻿using System.Windows;
-using System.Windows.Controls;
+﻿using Application.Features.Users;
+using System.Windows;
 
 namespace CRM;
 /// <summary>
@@ -7,8 +7,18 @@ namespace CRM;
 /// </summary>
 public partial class MainWindow : Window
 {
-    public MainWindow()
+    private readonly IUserService _userService;
+    public MainWindow(IUserService userService)
     {
+        _userService = userService;
         InitializeComponent();
+    }
+
+    private async void GetUser(object sender, RoutedEventArgs e)
+    {
+        var user = await _userService.Get(1);
+        Test.Content = user.Email;
+        App.Current.Properties["CurrentUser"] = user;
+        
     }
 }
