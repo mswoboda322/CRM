@@ -6,6 +6,13 @@ public class User : IdentityUser<long>
     public string FirstName { get; set; }
     public string LastName { get; set; }
 
+    public void Update(string email, string firstName, string lastName)
+    {
+        Email = email;
+        FirstName = firstName;
+        LastName = lastName;
+    }
+
     public static class Factory
     {
         public static User Create(string email, string firstName, string lastName)

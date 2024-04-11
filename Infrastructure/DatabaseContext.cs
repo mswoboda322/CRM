@@ -16,7 +16,6 @@ public class DatabaseContext : IdentityDbContext<User, IdentityRole<long>, long>
     {
     }
 
-    // NOTE: Place DbSets properties here, example:
     public DbSet<User> Users { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

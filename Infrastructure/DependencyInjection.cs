@@ -26,7 +26,7 @@ public static class DependencyInjection
         services.AddDbContext<DatabaseContext>(options =>
         {
             options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
-        });
+        }, ServiceLifetime.Transient);
 
         services.AddIdentityCore<User>().AddEntityFrameworkStores<DatabaseContext>();
         

@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace API.Controllers;
 [ApiController]
 [Route("[controller]")]
-[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+//[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
 public class UserController : ControllerBase
 {
     private readonly IUserService _userService;
@@ -20,7 +20,7 @@ public class UserController : ControllerBase
     [HttpPost("Create")]
     public async Task<ActionResult<long>> Create(UserCreateDTO createDTO)
     {
-        var userId = await _userService.Create(createDTO);
+        var userId = await _userService.CreateAsync(createDTO);
         return Ok(userId);
     }
 
