@@ -1,4 +1,5 @@
 ﻿using Domain.Entities;
+using Infrastructure.Configurations;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -15,8 +16,9 @@ public class DatabaseContext : IdentityDbContext<User, IdentityRole<long>, long>
     protected DatabaseContext()
     {
     }
-
     public DbSet<User> Users { get; set; }
+    public DbSet<Domain.Entities.Task> Tasks { get; set; }
+    public DbSet<Report> Reports { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -26,6 +28,7 @@ public class DatabaseContext : IdentityDbContext<User, IdentityRole<long>, long>
     {
 
         builder.ApplyConfigurationsFromAssembly(typeof(DependencyInjection).Assembly);
+        builder.ApplyConfiguration(new TaskConfiguration());
 
         base.OnModelCreating(builder);
 

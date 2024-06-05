@@ -42,9 +42,9 @@ public class UserService : IUserService
     {
         var user = new User();
         if (asNoTracking)
-            user = _databaseContext.Users.AsNoTracking().FirstOrDefault();
+            user = _databaseContext.Users.AsNoTracking().FirstOrDefault(x => x.Id == id);
         else
-            user = _databaseContext.Users.FirstOrDefault();
+            user = _databaseContext.Users.FirstOrDefault(x => x.Id == id);
         if (user is null)
             throw new Exception("UserNotFound");
         return _mapper.Map<UserDTO>(user);
@@ -83,7 +83,7 @@ public class UserService : IUserService
         return true;
     }
 
-    public async System.Threading.Tasks.Task Delete(long id)
+    public async System.Threading.Tasks.Task DeleteAsync(long id)
     {
         var user = _databaseContext.Users.FirstOrDefault();
         if (user is null)

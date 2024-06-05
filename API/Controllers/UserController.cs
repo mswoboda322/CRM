@@ -24,9 +24,28 @@ public class UserController : ControllerBase
         return Ok(userId);
     }
 
+    [HttpGet("List")]
+    public async Task<ActionResult<List<UserDTO>>> List()
+    {
+        return Ok(await  _userService.ListAsync());
+    }
+
     [HttpGet("{id}")]
     public async Task<ActionResult<UserDTO>> Get(long id)
     {
-        return Ok(await _userService.Get(id));
+        return Ok(_userService.Get(id));
+    }
+
+    [HttpPut("Update")]
+    public async Task<ActionResult<bool>> Update(UserUpdateDTO updateDTO)
+    {
+        return Ok(await _userService.UpdateAsync(updateDTO));
+    }
+
+    [HttpPut("Delete")]
+    public async Task<ActionResult<bool>> Delete(long userId)
+    {
+        await _userService.DeleteAsync(userId);
+        return Ok();
     }
 }

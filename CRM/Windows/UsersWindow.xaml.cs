@@ -88,7 +88,7 @@ public partial class UsersWindow : Window
             return;
         }
         var userService= _serviceProvider.GetService<IUserService>();
-        await userService.Delete(userId.Value);
+        await userService.DeleteAsync(userId.Value);
         MessageBox.Show("Użytkownik został usunięty");
         Refresh();    }
 

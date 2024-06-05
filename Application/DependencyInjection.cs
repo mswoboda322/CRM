@@ -1,4 +1,6 @@
 ﻿using Application.Abstractions;
+using Application.Features.Reports.DTOs;
+using Application.Features.Tasks.DTOs;
 using Application.Features.Users.DTOs;
 using AutoMapper;
 using Microsoft.Extensions.DependencyInjection;
@@ -22,6 +24,8 @@ public static class DependencyInjection
         services.AddSingleton(provider => new MapperConfiguration(mapper =>
         {
             mapper.AddProfile(new UserProfile());
+            mapper.AddProfile(new ReportProfile());
+            mapper.AddProfile(new TaskProfile());
 
         }).CreateMapper());
 

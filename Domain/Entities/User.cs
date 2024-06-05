@@ -5,6 +5,7 @@ public class User : IdentityUser<long>
 {
     public string FirstName { get; set; }
     public string LastName { get; set; }
+    public IList<Task> Tasks { get; set; }
 
     public void Update(string email, string firstName, string lastName)
     {

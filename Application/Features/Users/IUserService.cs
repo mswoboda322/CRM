@@ -10,5 +10,5 @@ public interface IUserService : IScopedApplicationService
     Task<List<UserDTO>> ListAsync(bool asNoTracking = false);
     List<UserDTO> List(bool asNoTracking = false);
     Task<bool> UpdateAsync(UserUpdateDTO updateDTO);
-    Task Delete(long id);
+    Task DeleteAsync(long id);
 }
