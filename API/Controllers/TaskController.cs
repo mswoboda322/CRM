@@ -1,12 +1,15 @@
 ﻿using Application.Features.Tasks;
 using Application.Features.Tasks.DTOs;
 using Application.Features.Users.DTOs;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
 
 [ApiController]
 [Route("[controller]")]
+[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
 public class TaskController : ControllerBase
 {
     private readonly ITaskService _taskService;
@@ -48,7 +51,7 @@ public class TaskController : ControllerBase
         return Ok(await _taskService.CompleteTask(id));
     }
 
-    [HttpPost("Delete")]
+    [HttpDelete("Delete")]
     public async Task<IActionResult> Delete(long id)
     {
         await _taskService.Delete(id);

@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace API.Controllers;
 [ApiController]
 [Route("[controller]")]
-//[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
 public class UserController : ControllerBase
 {
     private readonly IUserService _userService;
@@ -42,7 +42,7 @@ public class UserController : ControllerBase
         return Ok(await _userService.UpdateAsync(updateDTO));
     }
 
-    [HttpPut("Delete")]
+    [HttpDelete("Delete")]
     public async Task<ActionResult<bool>> Delete(long userId)
     {
         await _userService.DeleteAsync(userId);

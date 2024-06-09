@@ -1,5 +1,4 @@
 ﻿using Application.Features.Reports.DTOs;
-using Application.Features.Tasks.DTOs;
 using AutoMapper;
 using Domain.Entities;
 using Infrastructure;
@@ -20,7 +19,7 @@ public class ReportService : IReportService
 
     public async Task<long> CreateAsync(ReportCreateDTO createDTO)
     {
-        var report = Report.Factory.Create(createDTO.Description, createDTO.Description);
+        var report = Report.Factory.Create(createDTO.Description, createDTO.ContractorName);
         await _databaseContext.Reports.AddAsync(report);
         await _databaseContext.SaveChangesAsync();
         return report.Id;

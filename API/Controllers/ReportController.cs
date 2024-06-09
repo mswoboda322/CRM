@@ -1,11 +1,14 @@
 ﻿using Application.Features.Reports;
 using Application.Features.Reports.DTOs;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
 
 [ApiController]
 [Route("[controller]")]
+[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
 public class ReportController : ControllerBase
 {
     private readonly IReportService _reportService;
@@ -41,7 +44,7 @@ public class ReportController : ControllerBase
         return Ok();
     }
 
-    [HttpPost("Delete")]
+    [HttpDelete("Delete")]
     public async Task<IActionResult> Delete(long id)
     {
         await _reportService.Delete(id);

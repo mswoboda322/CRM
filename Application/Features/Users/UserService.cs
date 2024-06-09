@@ -85,7 +85,7 @@ public class UserService : IUserService
 
     public async System.Threading.Tasks.Task DeleteAsync(long id)
     {
-        var user = _databaseContext.Users.FirstOrDefault();
+        var user = _databaseContext.Users.FirstOrDefault(x => x.Id == id);
         if (user is null)
             throw new Exception("UserNotFound");
         await _userManager.DeleteAsync(user);
